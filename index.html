@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Visor Predial Buriticá</title>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<header>
+<h2>Visor Predial - Municipio de Buriticá</h2>
+</header>
+
+<div id="map"></div>
+
+<div id="infoPanel">
+<h3>Información del Predio</h3>
+<div id="infoContenido">
+Haga clic en un predio
+</div>
+</div>
+
+<div class="panel">
+
+<input type="text" id="buscarValor" placeholder="Buscar cédula o matrícula">
+
+<button onclick="buscarPropietario()">🔎 Buscar</button>
+
+<button onclick="miUbicacion()">📍 Mi ubicación</button>
+
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
+<script src="script.js"></script>
+
+</body>
+</html>
