@@ -156,8 +156,16 @@ html += "<b>Propietarios:</b><br>";
 
 if(lista){
 
+var verDatos = false; // cambiar a true solo en local
+
 lista.forEach(function(p){
+
+if(verDatos){
 html += "• " + p + "<br>";
+}else{
+html += "• Propietario<br>";
+}
+
 });
 
 }else{
