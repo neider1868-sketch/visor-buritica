@@ -97,6 +97,7 @@ L.marker(e.latlng)
 // variable global para predios
 var predios;
 var predioSeleccionado = null;
+var indicePredios = {};
 
 // cargar predios
 fetch("data/predios.geojson")
@@ -113,8 +114,12 @@ fillOpacity:0
 },
 
 onEachFeature:function(feature, layer){
+    
 
 var codigo = String(feature.properties.terreno_codigo).trim();
+
+// guardar referencia directa al layer
+indicePredios[codigo] = layer;
 
 layer.on("click", function(){
     // quitar resaltado anterior
@@ -125,7 +130,7 @@ weight:1.5,
 fillOpacity:0
 });
 }
-
+layer.getBounds().getCenter()
 // guardar nuevo predio seleccionado
 predioSeleccionado = layer;
 
@@ -140,8 +145,14 @@ fillOpacity:0.3
 
 var lista = propietarios[codigo];
 
+var centro = layer.getBounds().getCenter();
+
 var html = "<b>Predio:</b> " + codigo + "<br><br>";
+
+html += "<button onclick='irRuta(" + centro.lat + "," + centro.lng + ")'>🚗 Cómo llegar</button><br><br>";
+
 html += "<b>Propietarios:</b><br>";
+
 
 if(lista){
 
@@ -180,11 +191,9 @@ alert("No se encontró el propietario");
 return;
 }
 
-predios.eachLayer(function(layer){
+var layer = indicePredios[npn];
 
-var codigo = String(layer.feature.properties.terreno_codigo).trim();
-
-if(codigo === npn){
+if(layer){
 
 map.fitBounds(layer.getBounds());
 
@@ -192,6 +201,12 @@ layer.fire("click");
 
 }
 
-});
+}
+
+function irRuta(lat, lng){
+
+var url = "https://www.google.com/maps/dir/?api=1&destination=" + lat + "," + lng;
+
+window.open(url, "_blank");
 
 }
