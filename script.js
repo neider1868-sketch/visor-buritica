@@ -116,7 +116,7 @@ fillOpacity:0
 onEachFeature:function(feature, layer){
     
 
-var codigo = String(feature.properties.terreno_codigo).trim();
+var codigo = String(feature.properties.TERRENO_CODIGO).trim();
 
 // guardar referencia directa al layer
 indicePredios[codigo] = layer;
